@@ -3,16 +3,17 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { writeFileSync } from 'fs';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import path from 'path';
+import {join}  from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule,{cors:true});
   AppModule.configureSwagger(app);
-  app.useStaticAssets(path.join(__dirname, '..', 'public', 'dist','assets'));
+  const distPath = join(process.cwd(), 'public', 'dist');
+  app.useStaticAssets(distPath);
 
-  // Redirect all routes to index.html for React/Vite SPA
+  // Redirect all other requests to index.html for SPA support
   app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'dist', 'index.html'));
+    res.sendFile(join(distPath, 'index.html'));
   });
   const document = SwaggerModule.createDocument(
     app,
