@@ -1,0 +1,269 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/cars": {
+      "get": {
+        "operationId": "CarsController_getAllCarsOfUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All the cars of the user."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cars"
+        ]
+      },
+      "post": {
+        "operationId": "CarsController_addCar",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCarDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Car with the provided data is successfully created."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cars"
+        ]
+      }
+    },
+    "/cars/{car_id}": {
+      "get": {
+        "operationId": "CarsController_getCarData",
+        "parameters": [
+          {
+            "name": "car_id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the car",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data of the car with the given id is returned."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cars"
+        ]
+      },
+      "patch": {
+        "operationId": "CarsController_editCar",
+        "parameters": [
+          {
+            "name": "car_id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the car",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCarDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The data of the car with the given id is successfully edited."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cars"
+        ]
+      },
+      "delete": {
+        "operationId": "CarsController_deleteCar",
+        "parameters": [
+          {
+            "name": "car_id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the car",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The car with the given id is successfuly deleted."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cars"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in."
+          },
+          "401": {
+            "description": "Invalid credentials."
+          }
+        },
+        "summary": "User login",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "operationId": "AuthController_singup",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully registered."
+          },
+          "400": {
+            "description": "Bad request (e.g. missing or invalid fields)."
+          }
+        },
+        "summary": "User signup",
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "",
+    "description": "",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateCarDTO": {
+        "type": "object",
+        "properties": {}
+      },
+      "LoginDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "SigninDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password"
+        ]
+      }
+    }
+  }
+}
