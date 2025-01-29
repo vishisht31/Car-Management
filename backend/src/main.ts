@@ -8,7 +8,7 @@ import path from 'path';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule,{cors:true});
   AppModule.configureSwagger(app);
-  app.useStaticAssets(path.join(__dirname, '..', 'public', 'dist'));
+  app.useStaticAssets(path.join(__dirname, '..', 'public', 'dist','assets'));
 
   // Redirect all routes to index.html for React/Vite SPA
   app.use('*', (req, res) => {
