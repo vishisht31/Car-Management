@@ -19,7 +19,7 @@ export default class ApiClient {
     // );
   }
   getBaseUrl() {
-    return "https://car-management-zetm.onrender.com"; //`${process.env.REACT_APP_SERVICE_BASE_URL}`;
+    return "https://car-management-backend-tuep.onrender.com"; //`${process.env.REACT_APP_SERVICE_BASE_URL}`;
   }
 
   //   handleError(error) {
